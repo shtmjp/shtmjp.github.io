@@ -1,35 +1,21 @@
-# Base image: Ruby with necessary dependencies for Jekyll
-FROM ruby:3.2
+# Keep Ruby aligned with .github/workflows/jekyll.yml.
+FROM ruby:3.3-bookworm
 
-# Install dependencies
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    nodejs \
+RUN apt-get update && apt-get install -y --no-install-recommends nodejs npm \
+    && npm install --global uglify-js@3.19.3 \
     && rm -rf /var/lib/apt/lists/*
 
+RUN groupadd -g 1000 vscode \
+    && useradd -m -u 1000 -g vscode vscode
 
-# Create a non-root user with UID 1000
-RUN groupadd -g 1000 vscode && \
-    useradd -m -u 1000 -g vscode vscode
-
-# Set the working directory
 WORKDIR /usr/src/app
-
-# Set permissions for the working directory
-RUN chown -R vscode:vscode /usr/src/app
-
-# Switch to the non-root user
+RUN chown vscode:vscode /usr/src/app
 USER vscode
 
-# Copy Gemfile into the container (necessary for `bundle install`)
-COPY Gemfile ./
-
-
-
-# Install bundler and dependencies
-RUN gem install connection_pool:2.5.0
-RUN gem install bundler:2.3.26
+COPY --chown=vscode:vscode Gemfile ./
 RUN bundle install
 
-# Command to serve the Jekyll site
-CMD ["jekyll", "serve", "-H", "0.0.0.0", "-w", "--config", "_config.yml,_config_docker.yml"]
+EXPOSE 4000
+
+# Build the ignored JavaScript bundle before serving the mounted checkout.
+CMD ["sh", "-c", "npm run build:js && exec bundle exec jekyll serve --host 0.0.0.0 --force_polling --config _config.yml,_config_docker.yml"]

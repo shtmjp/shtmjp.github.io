@@ -1,5 +1,5 @@
 # Workflow for building and deploying an Academic Pages / Jekyll site to GitHub Pages
-name: Deploy Academic Pages template site to Pages
+name: Deploy Takaaki Shiotani's website to Pages
 
 on:
   # Runs on pushes targeting the default branch
@@ -35,11 +35,11 @@ jobs:
       - name: Setup Ruby, JRuby and TruffleRuby
         uses: ruby/setup-ruby@v1.328.0
         with:
-          ruby-version: '3.1'
+          ruby-version: '3.3'
           bundler-cache: true
           cache-version: 0
       - name: Install UglifyJS
-        run: npm install -g uglify-js
+        run: npm install -g uglify-js@3.19.3
       - name: Minify JS files
         run: |
           uglifyjs assets/js/plugins/jquery.greedy-navigation.js assets/js/_main.js assets/js/theme.js -c -m -o assets/js/main.min.js

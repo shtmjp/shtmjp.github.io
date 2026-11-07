@@ -1,9 +1,11 @@
 services:
   jekyll-site:
-    image: jekyll-site
+    image: shtmjp-academic-pages
     build: .
-    volumes: [ .:/usr/src/app ]
-    ports: [ 4000:4000 ]
-    user: 1000:1000
-    environment: [ JEKYLL_ENV=docker ]
-    command: sleep infinity
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "127.0.0.1:4000:4000"
+    environment:
+      JEKYLL_ENV: docker
+    init: true

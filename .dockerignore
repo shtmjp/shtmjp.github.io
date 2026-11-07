@@ -1,0 +1,10 @@
+.git
+.bundle
+.jekyll-cache
+.sass-cache
+_site
+node_modules
+vendor
+local
+Gemfile.lock
+.DS_Store
