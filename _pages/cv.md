@@ -34,7 +34,7 @@ redirect_from:
 
 ## Experience
 
-- **R&D at [Tradom Inc.](https://www.tradom.jp/company/team)**, Nov 2023 – Mar 2026. Develop high-frequency predictive models for FX and stocks, and design reproducible backtesting pipelines.
+- **R&D at [Tradom Inc.](https://www.tradom.jp/company/team)**, Nov 2023 – Present. Develop high-frequency predictive models for FX and stocks, and design reproducible backtesting pipelines.
 - **Data Specialist Internship**, Recruit Co., Ltd., Jan 2025 – Feb 2025.
 - **Research Internship**, NTT Computer & Data Science Laboratories, Jan 2022 – Feb 2022.
 - **Research Internship**, Mitsubishi UFJ Trust Investment Technology Institute (MTEC), Oct 2021.
